@@ -1,17 +1,36 @@
 import express from 'express'
 
-var app = express();
+const app = express();
+const port = 3000
 
-app.listen(3000, ()=>{
-    console.log("Started on port number 3000")
+app.listen(port, function() {
+    console.log(`App started on port number ${port}`)
 });
 
-app.get("/", (req,res)=>{
-    res.send("Text")
+let results = [
+    {    
+    question1: true,
+    question2: true,
+    question3: true,
+    question4: true,
+    question5: true,
+    question6: true,
+},
+{    
+    question1: true,
+    question2: true,
+    question3: true,
+    question4: true,
+    question5: true,
+    question6: true,
+},
+]
+
+app.get("/", function(req,res) {
+    res.send("Hello world")
     let scores = []
     for (let i = 0; i < results.length; i++) {
         let score = 0
-   //   const result = req.body.data[i]
         let result = results[i]
             if (result.question1 === true) score +=3
             if (result.question2 === true) score +=1
@@ -38,26 +57,7 @@ app.get("/", (req,res)=>{
     console.log(scores)
 });
 
-let results = [
-        {    
-        question1: true,
-        question2: true,
-        question3: true,
-        question4: true,
-        question5: true,
-        question6: true,
-    },
-    {    
-        question1: true,
-        question2: true,
-        question3: true,
-        question4: true,
-        question5: true,
-        question6: true,
-    },
-]
-
-app.post("/", (req, res)=> {
+app.post("/", (req)=> {
     req.body.command()
     }
 );
