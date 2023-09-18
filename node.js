@@ -69,7 +69,7 @@ function computeScores(result){
 
 // scores +patient name and MRN stored in a JSON file, sent to server Kendall is working on
 app.get("/", function(req,res) {
-    res.sendFile(__dirname+"index.html");
+    res.sendFile("index.html");
 });
 
 app.use(express.json());
