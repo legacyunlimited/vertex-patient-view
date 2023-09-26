@@ -2,7 +2,7 @@ import express from 'express'
 import fs from 'fs'
 
 const app = express();
-const port = 3001
+const port = 3002
 
 app.use(express.static("."));
 
@@ -14,9 +14,9 @@ function savePatientData(patientJSON){
     fs.writeFileSync(patientJSON.MRN+".json",JSON.stringify(patientJSON));
 }
 function getMRN(callback){
-    return "199999";
+    let returnedMRN = "199999";
     //This is a dummy function! Eventually this will be hooked up to Kendell's Lamda!
-    callback();
+    callback(returnedMRN);  
 }
 
 function buildPatientJSON(qData){    
@@ -42,16 +42,16 @@ function buildPatientJSON(qData){
     let substanceUse = "low";
     
     //Compute Numerical Scores
-    if (qData.question1 === "Yes") foodSecurityScore += 3;
+    if (qData.question1 === "No") foodSecurityScore += 3;
     if (qData.question2 === "Yes") foodSecurityScore += 1;
     if (qData.question3 === "Yes") foodSecurityScore += 1;
-    if (qData.question4 === "Yes") housingSecurityScore += 4;
-    if (qData.question5 === "Yes") housingSecurityScore += 2;
+    if (qData.question4 === "No") housingSecurityScore += 4;
+    if (qData.question5 === "No") housingSecurityScore += 2;
     if (qData.question6 === "Yes") housingSecurityScore += 1;
     if (qData.question7 === "Yes") housingSecurityScore += 1;
-    if (qData.question8 === "Yes") transportationScore += 2;
+    if (qData.question8 === "No") transportationScore += 2;
     if (qData.question9 === "Yes") transportationScore += 1;
-    if (qData.question10 === "Yes") interpersonalSafetyScore += 4;
+    if (qData.question10 === "No") interpersonalSafetyScore += 4;
     if (qData.question11 === "Yes") interpersonalSafetyScore += 2;
     if (qData.question12 === "Yes") interpersonalSafetyScore += 1;
     if (qData.question13 === "Yes") suicideScore += 5;
@@ -113,7 +113,7 @@ function buildPatientJSON(qData){
     if (highestSubstanceScore > 3) substanceUse = "imminent";
     //Assemble patient Data JSON
     let patientData = {
-        MRN: null,
+        MRN: 123456,
         name: qData.name,
         riskFactors: {
            foodInsecurity: foodInsecurity,
@@ -130,11 +130,12 @@ function buildPatientJSON(qData){
 
     getMRN((returnedMRN)=>{
         patientData.MRN = returnedMRN;
+        console.log("Patientsave is being called")
         savePatientData(patientData);
     });
 }
 
-// patient submit questionaire, save name and score
+
 // scores +patient name and MRN stored in a JSON file, sent to server Kendall is working on
 app.get("/", function(req,res) {
     res.sendFile("index.html");
@@ -144,7 +145,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.post("/", (req,res)=> {
-    var questionierData = req.body;
+    let questionierData = req.body;
     console.log(questionierData);
 
     if(req.body.command == "computeRiskScores"){
