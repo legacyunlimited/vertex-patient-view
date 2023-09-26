@@ -28,7 +28,10 @@ function buildPatientJSON(qData){
     let suicideScore = 0;
     let depressionScore = 0;
     let stressScore = 0;
-    let substanceScore = 0;
+    let alcoholScore = 0;
+    let prescriptionDrugScore = 0;
+    let illegalDrugScore = 0;
+    let tobaccoScore = 0;
     let foodInsecurity = "low";
     let housingInsecurity = "low";
     let transportationInaccessibility = "low";
@@ -66,22 +69,22 @@ function buildPatientJSON(qData){
     if (qData.question20 === "Somewhat") stressScore += 2;
     if (qData.question20 === "Quite a bit") stressScore += 3;
     if (qData.question20 === "Very much") stressScore += 4;
-    if (qData.question21 === "Once or Twice") substanceScore += 1;
-    if (qData.question21 === "Monthly") substanceScore += 2;
-    if (qData.question21 === "Weekly") substanceScore += 3;
-    if (qData.question21 === "Daily or Almost Daily") substanceScore += 4;
-    if (qData.question22 === "Once or Twice") substanceScore += 1;
-    if (qData.question22 === "Monthly") substanceScore += 2;
-    if (qData.question22 === "Weekly") substanceScore += 3;
-    if (qData.question22 === "Daily or Almost Daily") substanceScore += 4;
-    if (qData.question23 === "Once or Twice") substanceScore += 1;
-    if (qData.question23 === "Monthly") substanceScore += 2;
-    if (qData.question23 === "Weekly") substanceScore += 3;
-    if (qData.question23 === "Daily or Almost Daily") substanceScore += 4;
-    if (qData.question24 === "Once or Twice") substanceScore += 1;
-    if (qData.question24 === "Monthly") substanceScore += 2;
-    if (qData.question24 === "Weekly") substanceScore += 3;
-    if (qData.question24 === "Daily or Almost Daily") substanceScore += 4;
+    if (qData.question21 === "Once or Twice") alcoholScore += 1;
+    if (qData.question21 === "Monthly") alcoholScore += 2;
+    if (qData.question21 === "Weekly") alcoholScore += 3;
+    if (qData.question21 === "Daily or Almost Daily") alcoholScore += 4;
+    if (qData.question22 === "Once or Twice") prescriptionDrugScore += 1;
+    if (qData.question22 === "Monthly") prescriptionDrugScore += 2;
+    if (qData.question22 === "Weekly") prescriptionDrugScore += 3;
+    if (qData.question22 === "Daily or Almost Daily") prescriptionDrugScore += 4;
+    if (qData.question23 === "Once or Twice") illegalDrugScore += 1;
+    if (qData.question23 === "Monthly") illegalDrugScore += 2;
+    if (qData.question23 === "Weekly") illegalDrugScore += 3;
+    if (qData.question23 === "Daily or Almost Daily") illegalDrugScore += 4;
+    if (qData.question24 === "Once or Twice") tobaccoScore += 1;
+    if (qData.question24 === "Monthly") tobaccoScore += 2;
+    if (qData.question24 === "Weekly") tobaccoScore += 3;
+    if (qData.question24 === "Daily or Almost Daily") tobaccoScore += 4;
 
     //Translate Numerical Risk Scores into Verbal Risk Values
     if (foodSecurityScore === 1) foodInsecurity = "medium";
@@ -98,10 +101,16 @@ function buildPatientJSON(qData){
     if (suicideScore < 5) suicideRisk = "high"; 
     if (suicideScore >= 5) suicideRisk = "high"; 
     if (depressionScore >= 3) depressionRisk = "high";
-    if (stressScore < 2) emotionalDistress = "low"
-    if (stressScore === 2) emotionalDistress = "medium"
-    if (stressScore === 3) emotionalDistress = "high"
-    if (stressScore >= 4) emotionalDistress = "imminent"
+    if (stressScore < 2) emotionalDistress = "low";
+    if (stressScore === 2) emotionalDistress = "medium";
+    if (stressScore === 3) emotionalDistress = "high";
+    if (stressScore >= 4) emotionalDistress = "imminent";
+
+    let highestSubstanceScore = Math.max(alcoholScore, prescriptionDrugScore, illegalDrugScore, tobaccoScore)
+    if (highestSubstanceScore < 2) substanceUse = "low";
+    if (highestSubstanceScore === 2) substanceUse = "medium";
+    if (highestSubstanceScore === 3) substanceUse = "high";
+    if (highestSubstanceScore > 3) substanceUse = "imminent";
     //Assemble patient Data JSON
     let patientData = {
         MRN: null,
