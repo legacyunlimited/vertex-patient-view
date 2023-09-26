@@ -1,0 +1,40 @@
+{
+    MRN: 123456,
+    name: "Christine Chapel",
+    riskFactors: {
+       foodInsecurity: "low",
+       housingInsecurity: "low",
+       transportationInaccessibility:  "low",
+       interpersonalSafetyRisk: "low",
+       suicideRisk: "medium",
+       depressionScore: "medium",
+       emotionalDistress: "high",
+       substanceUse: "low"
+    }
+    questionnaireResponses: {
+        "q1": "yes",
+        "q2": "",
+        "q3": "",
+        "q4": "",
+        "q5": "",
+        "q6": "",
+        "q7": "",
+        "q8": "",
+        "q9": "",
+        "q10": "",
+        "q11": "",
+        "q12": "",
+        "q13": "",
+        "q14": "",
+        "q15": "",
+        "q16": "",
+        "q17": "",
+        "q18a": "",
+        "q18b": "",
+        "q19": "",
+        "q20a": "",
+        "q20b": "",
+        "q20c": "",
+        "q20d": ""
+    }
+}
