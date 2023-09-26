@@ -130,7 +130,7 @@ function buildPatientJSON(qData){
 
     getMRN((returnedMRN)=>{
         patientData.MRN = returnedMRN;
-        console.log("Patientsave is being called")
+        console.log("savePatientData is being called")
         savePatientData(patientData);
     });
 }
@@ -145,14 +145,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.post("/", (req,res)=> {
-    let questionierData = req.body;
-    console.log(questionierData);
+    let questionnaireData = req.body;
+    console.log(questionnaireData);
 
     if(req.body.command == "computeRiskScores"){
-        console.log("Questioneer requested the backend computeRiskScores");
-        buildPatientJSON(questionierData);
+        console.log("Questionnaire requested the backend computeRiskScores");
+        buildPatientJSON(questionnaireData);
     }else{
-        console.log("Questioneer send the backend a post command that it did not recognize");
+        console.log("Questionnaire sent the backend a post command that it did not recognize");
     }
     res.status(204).send();
     
