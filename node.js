@@ -113,7 +113,7 @@ function buildPatientJSON(qData){
     if (highestSubstanceScore > 3) substanceUse = "imminent";
     //Assemble patient Data JSON
     let patientData = {
-        MRN: 123456,
+        MRN: null,
         name: qData.name,
         riskFactors: {
            foodInsecurity: foodInsecurity,
