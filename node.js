@@ -66,7 +66,7 @@ function computeScores(result){
 }
 
 
-
+// patient submit questionaire, save name and score
 // scores +patient name and MRN stored in a JSON file, sent to server Kendall is working on
 app.get("/", function(req,res) {
     res.sendFile("index.html");
