@@ -11,7 +11,7 @@ app.listen(port, function() {
 });
 
 function savePatientData(patientJSON){
-    fs.writeFileSync(patientJSON.MRN+".json",JSON.stringify(patientJSON));
+    fs.writeFileSync(patientJSON.MRN+".json",JSON.stringify(patientJSON, null, 4));
 }
 function getMRN(callback){
     let returnedMRN = "199999";
