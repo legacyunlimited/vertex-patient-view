@@ -146,6 +146,11 @@ app.get("/", function(req,res) {
     res.sendFile("index.html");
 });
 
+app.get("/allPatientData", function(req,res) {
+    const allPatients = JSON.parse(fs.readFileSync(`patients.json`, `utf-8`));
+    res.json(allPatients);
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
