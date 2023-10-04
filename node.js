@@ -11,7 +11,14 @@ app.listen(port, function() {
 });
 
 function savePatientData(patientJSON){
-    fs.writeFileSync(patientJSON.MRN+".json",JSON.stringify(patientJSON, null, 4));
+    fs.writeFileSync(patientJSON.MRN + ".json",JSON.stringify(patientJSON, null, 4));
+    let allPatientData = [];
+    if (fs.existsSync('patients.json')) {
+        allPatientData = JSON.parse(fs.readFileSync('patients.json', 'utf8'));
+    }
+
+    allPatientData.push(patientJSON);
+    fs.writeFileSync('patients.json', JSON.stringify(allPatientData, null, 4));
 }
 function getMRN(callback){
     let returnedMRN = "199999";
@@ -155,35 +162,3 @@ app.post("/", (req,res)=> {
     res.status(204).send();
     
 });
-
-/*
-var exampleBody = {
-    command: "computeRiskScores",
-    data: {
-        "q1": "yes",
-        "q2": "",
-        "q3": "",
-        "q4": "",
-        "q5": "",
-        "q6": "",
-        "q7": "",
-        "q8": "",
-        "q9": "",
-        "q10": "",
-        "q11": "",
-        "q12": "",
-        "q13": "",
-        "q14": "",
-        "q15": "",
-        "q16": "",
-        "q17": "",
-        "q18a": "",
-        "q18b": "",
-        "q19": "",
-        "q20a": "",
-        "q20b": "",
-        "q20c": "",
-        "q20d": ""
-    }
-};
-*/
