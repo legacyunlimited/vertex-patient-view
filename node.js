@@ -2,7 +2,7 @@ import express from 'express'
 import fs from 'fs'
 
 const app = express();
-const port = 3002
+const port = 2261;
 
 app.use(express.static("."));
 
