@@ -1,10 +1,15 @@
-import express from 'express'
-import fs from 'fs'
+import express from 'express';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const port = 2270;
 
-app.use(express.static("."));
+app.use(express.static(path.join(__dirname,".")));
+
 
 app.listen(port, function() {
     console.log(`App started on port number ${port}`)
@@ -142,10 +147,15 @@ function buildPatientJSON(qData){
     });
 }
 
-app.get("/", function(req,res) {
-    res.sendFile("index.html");
+app.get("/", (req, res)=>{
+    res.sendFile(__dirname+"/index.html");
 });
-
+app.get("/about", (req,res)=>{
+    res.sendFile(__dirname+"/public/About.html")
+})
+app.get("/question", (req,res)=>{
+    res.sendFile(__dirname+"/questionnaire/index.html")
+})
 app.get("/allPatientData", function(req,res) {
     const allPatients = JSON.parse(fs.readFileSync(`patients.json`, `utf-8`));
     res.json(allPatients);
