@@ -26,7 +26,7 @@ function savePatientData(patientJSON){
     allPatientData.push(patientJSON);
     fs.writeFileSync('patients.json', JSON.stringify(allPatientData, null, 4));
 }
-
+// Grab MRN, change localhost and returnedMRN
 async function getMRN(callback, patientName) {
     const apiEndpoint = `http://localhost:2280/patient/search?name=${encodeURIComponent(patientName)}`;
     const response = await axios.get(apiEndpoint);
