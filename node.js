@@ -1,6 +1,7 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+import axios from 'axios';
 import { fileURLToPath } from 'url';
 
 
@@ -25,10 +26,12 @@ function savePatientData(patientJSON){
     allPatientData.push(patientJSON);
     fs.writeFileSync('patients.json', JSON.stringify(allPatientData, null, 4));
 }
-function getMRN(callback){
-    let returnedMRN = "199999";
-    //This is a dummy function! Eventually this will be hooked up to Kendell's Lamda!
-    callback(returnedMRN);  
+
+async function getMRN(callback, patientName) {
+    const apiEndpoint = `http://localhost:2280/patient/search?name=${encodeURIComponent(patientName)}`;
+    const response = await axios.get(apiEndpoint);
+    const returnedMRN = response.MRN;
+    callback(returnedMRN);
 }
 
 function buildPatientJSON(qData){    
@@ -144,7 +147,7 @@ function buildPatientJSON(qData){
         patientData.MRN = returnedMRN;
         console.log("savePatientData is being called")
         savePatientData(patientData);
-    });
+    }, qData.name);
 }
 
 app.get("/", (req, res)=>{
