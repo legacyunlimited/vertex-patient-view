@@ -28,7 +28,7 @@ function savePatientData(patientJSON){
 }
 // Grab MRN, change localhost and returnedMRN
 async function getMRN(callback, patientName) {
-    const apiEndpoint = `http://localhost:2280/patient/search?name=${encodeURIComponent(patientName)}`;
+    const apiEndpoint = `http://160.94.179.166/2280/patient/search?name=${encodeURIComponent(patientName)}`;
     const response = await axios.get(apiEndpoint);
     const returnedMRN = response.MRN;
     callback(returnedMRN);
