@@ -1,6 +1,6 @@
 {
     "MRN": "199999",
-    "name": "",
+    "name": "Kim Possible",
     "riskFactors": {
         "foodInsecurity": "imminent",
         "housingInsecurity": "imminent",
@@ -13,7 +13,7 @@
     },
     "questionnaireResponses": {
         "command": "computeRiskScores",
-        "name": "",
+        "name": "Kim Possible",
         "question1": "No",
         "question2": "No",
         "question3": "No",

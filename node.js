@@ -17,6 +17,7 @@ app.listen(port, function() {
 });
 
 function savePatientData(patientJSON){
+    console.log('savePatientData called');
     fs.writeFileSync(patientJSON.MRN + ".json",JSON.stringify(patientJSON, null, 4));
     let allPatientData = [];
     if (fs.existsSync('patients.json')) {
@@ -28,6 +29,7 @@ function savePatientData(patientJSON){
 }
 // Grab MRN, change localhost and returnedMRN
 async function getMRN(callback, patientName) {
+    console.log('getMRN called');
     const apiEndpoint = `http://160.94.179.166/2280/patient/search?name=${encodeURIComponent(patientName)}`;
     const response = await axios.get(apiEndpoint);
     const returnedMRN = response.MRN;
