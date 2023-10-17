@@ -21,7 +21,7 @@
    <div class="row">
     <div class="col-4">
      <div class="list-group" id="list-tab" role="tablist">
-      <a aria-controls="list-PatientInfo" class="list-group-item list-group-item-action" data-bs-toggle="list" href="#PatientInfo" id="list-PatientInfo-list" role="tab">
+      <a aria-controls="list-PatientInfo" class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#PatientInfo" id="list-PatientInfo-list" role="tab">
         Patient Info
       </a>
       <a aria-controls="list-FoodSecurity" class="list-group-item list-group-item-action" data-bs-toggle="list" href="#FoodSecurity" id="list-FoodSecurity-list" role="tab">
@@ -55,16 +55,29 @@
       <!-- Patient Info -->
       <div aria-labelledby="list-PatientInfo-list" class="tab-pane fade show active" id="PatientInfo" role="tabpanel">
         <div class="mb-3">
-            <label class="form-label">
-             Patient Name
-            </label>
-            <div class="form-check form-check-reverse form-check-inline">
-             <input id="inlineRadioDefault1" name="name" type="text"/>
-            </div>
-      </div>
+            <label for="patientName" class="form-label">Patient Name</label>
+            <input id="patientName" name="patientName" type="text" class="form-control"/>
+        </div>
+        <div class="mb-3">
+          <label for="patientGender" class="form-label">Gender</label>
+          <select id="patientGender" name="patientGender" class="form-select">
+              <option selected>Choose...</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              <option value="other">Other</option>
+          </select>
+        </div>
+        <div class="mb-3">
+            <label for="patientBirthDate" class="form-label">Birth Date</label>
+            <input id="patientBirthDate" name="patientBirthDate" type="date" class="form-control"/>
+        </div>
+        <div class="mb-3">
+            <label for="patientAddress" class="form-label">Address</label>
+            <input id="patientAddress" name="patientAddress" type="text" class="form-control"/>
+        </div>
       </div>
       <!-- Food Security (0-3; 1: medium risk, 2: high risk, 3: imminent risk) -->
-      <div aria-labelledby="list-FoodSecurity-list" class="tab-pane fade show active" id="FoodSecurity" role="tabpanel">
+      <div aria-labelledby="list-FoodSecurity-list" class="tab-pane fade" id="FoodSecurity" role="tabpanel">
        <div class="mb-3">
         <label class="form-label">
          1. Do you have food for tonight? (Y/N)
