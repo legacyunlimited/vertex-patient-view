@@ -10,7 +10,7 @@
   <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
   <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@200&amp;display=swap" rel="stylesheet"/>
   <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" rel="stylesheet"/>
-  <link href="https://cdn-icons-png.flaticon.com/512/2284/2284001.png" rel="icon" type="image/png"/>
+  <link rel="icon" href="\Assets\Logo.webp" type="image/x-icon">
  </head>
  <body>
   <h2>
@@ -21,7 +21,10 @@
    <div class="row">
     <div class="col-4">
      <div class="list-group" id="list-tab" role="tablist">
-      <a aria-controls="list-FoodSecurity" class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#FoodSecurity" id="list-FoodSecurity-list" role="tab">
+      <a aria-controls="list-PatientInfo" class="list-group-item list-group-item-action" data-bs-toggle="list" href="#PatientInfo" id="list-PatientInfo-list" role="tab">
+        Patient Info
+      </a>
+      <a aria-controls="list-FoodSecurity" class="list-group-item list-group-item-action" data-bs-toggle="list" href="#FoodSecurity" id="list-FoodSecurity-list" role="tab">
        Food Security
       </a>
       <a aria-controls="list-HouseSecurity" class="list-group-item list-group-item-action" data-bs-toggle="list" href="#HouseSecurity" id="list-HouseSecurity-list" role="tab">
@@ -49,8 +52,8 @@
     </div>
     <div class="col-8">
      <div class="tab-content" id="nav-tabContent">
-      <!-- Food Security (0-3; 1: medium risk, 2: high risk, 3: imminent risk) -->
-      <div aria-labelledby="list-FoodSecurity-list" class="tab-pane fade show active" id="FoodSecurity" role="tabpanel">
+      <!-- Patient Info -->
+      <div aria-labelledby="list-PatientInfo-list" class="tab-pane fade show active" id="PatientInfo" role="tabpanel">
         <div class="mb-3">
             <label class="form-label">
              Patient Name
@@ -58,7 +61,10 @@
             <div class="form-check form-check-reverse form-check-inline">
              <input id="inlineRadioDefault1" name="name" type="text"/>
             </div>
-           </div>
+      </div>
+      </div>
+      <!-- Food Security (0-3; 1: medium risk, 2: high risk, 3: imminent risk) -->
+      <div aria-labelledby="list-FoodSecurity-list" class="tab-pane fade show active" id="FoodSecurity" role="tabpanel">
        <div class="mb-3">
         <label class="form-label">
          1. Do you have food for tonight? (Y/N)
