@@ -181,21 +181,35 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.post("/updatePatient", (req, res) => {
-    const { patientName, MRN, newData } = req.body;
+    const { patientName, MRN, newData } = req.body
     fs.readFile('patients.json', 'utf8', (err, data) => {
-        let newPatientData = JSON.parse(data);
-        let patientIndex = newPatientData.findIndex(patient => patient.MRN === MRN && patient.patientName === patientName);
+        let PatientData = JSON.parse(data)
+        let patientIndex = PatientData.findIndex(patient => patient.MRN === MRN && patient.patientName === patientName)
         if (patientIndex !== -1) {
-            newPatientData[patientIndex] = newData; 
+            PatientData[patientIndex] = newData
         } else {
-            res.status(404).send('Patient not found');
-            return;
+            res.status(404).send('Patient not found')
+            return
         }
-        fs.writeFile('patients.json', JSON.stringify(newPatientData, null, 4), () => {});
-        res.send('Patient data updated successfully');
+        fs.writeFile('patients.json', JSON.stringify(PatientData, null, 4), () => {})
+        res.send('Patient data updated successfully')
     });
 });
 
+app.post("/deletePatient", (req, res) => {
+    const { patientName, MRN } = req.body
+    fs.readFile('patients.json', 'utf8', (data) => {
+        let patientData = JSON.parse(data)
+        let patientIndex = patientData.findIndex(patient => patient.MRN === MRN && patient.patientName === patientName)
+        if (patientIndex !== -1) {
+            patientData.splice(patientIndex, 1)
+            fs.writeFile('patients.json', JSON.stringify(patientData, null, 4), () => {})
+            res.send('Patient data deleted successfully')
+        } else {
+            res.status(404).send('Patient not found')
+        }
+    });
+});
 
 app.post("/", (req,res)=> {
     let questionnaireData = req.body;
