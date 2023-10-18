@@ -1,6 +1,6 @@
 {
-    "MRN": null,
-    "patientName": "Rick James",
+    "MRN": "MRN Not Available",
+    "patientName": "John Doe",
     "riskFactors": {
         "foodInsecurity": "low",
         "housingInsecurity": "low",
@@ -13,7 +13,7 @@
     },
     "questionnaireResponses": {
         "command": "computeRiskScores",
-        "patientName": "Rick James",
+        "patientName": "John Doe",
         "patientAge": "22",
         "patientGender": "male",
         "patientDOB": "2222-02-22"

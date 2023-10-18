@@ -1,9 +1,9 @@
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
-import axios from 'axios';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
+import request from 'request'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
@@ -29,13 +29,23 @@ function savePatientData(patientJSON){
     fs.writeFileSync('patients.json', JSON.stringify(allPatientData, null, 4));
 }
 // Grab MRN - Changed returnedMRN to be response.data.medicalRecordNumber
-async function getMRN(callback, patientName) {
+function getMRN(callback, patientName) {
     console.log('getMRN called');
-    const apiEndpoint = `http://160.94.179.166/2280/patient/search?name=${encodeURIComponent(patientName)}`;
-    const response = await axios.get(apiEndpoint);
-    const returnedMRN = response.data.medicalRecordNumber;
-    callback(returnedMRN);
+    const apiEndpoint = {
+        url: `http://160.94.179.166/2280/patient/search?name=${encodeURIComponent(patientName)}`,
+        json: true
+    };
+    request(apiEndpoint, (error, response, body) => {
+        if (!error && response.statusCode === 200 && body.medicalRecordNumber) {
+            callback(body.medicalRecordNumber);
+        } else {
+            console.error('Error fetching MRN:', error);
+            callback(`MRN Not Available`);
+        }
+    });
 }
+
+// put in string, if mrn not equal to null, put mrn, else put mrn not available
 
 function buildPatientJSON(qData){    
     //Initialize Score Varibles
@@ -132,7 +142,7 @@ function buildPatientJSON(qData){
     //Assemble patient Data JSON
     let patientData = {
         MRN: null,
-        name: qData.name,
+        patientName: qData.patientName,
         riskFactors: {
            foodInsecurity: foodInsecurity,
            housingInsecurity: housingInsecurity,
@@ -150,7 +160,7 @@ function buildPatientJSON(qData){
         patientData.MRN = returnedMRN;
         console.log("savePatientData is being called")
         savePatientData(patientData);
-    }, qData.name);
+    }, qData.patientName);
 }
 
 app.get("/", (req, res)=>{
