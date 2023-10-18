@@ -1,0 +1,20 @@
+{
+    "MRN": null,
+    "riskFactors": {
+        "foodInsecurity": "low",
+        "housingInsecurity": "low",
+        "transportationInaccessibility": "low",
+        "interpersonalSafetyRisk": "low",
+        "suicideRisk": "high",
+        "depressionRisk": "low",
+        "emotionalDistress": "low",
+        "substanceUse": "low"
+    },
+    "questionnaireResponses": {
+        "command": "computeRiskScores",
+        "patientName": "Rick James",
+        "patientAge": "22",
+        "patientGender": "male",
+        "patientDOB": "2002-05-20"
+    }
+}
