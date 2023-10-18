@@ -180,6 +180,23 @@ app.get("/allPatientData", function(req,res) {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.post("/updatePatient", (req, res) => {
+    const { patientName, MRN, newData } = req.body;
+    fs.readFile('patients.json', 'utf8', (err, data) => {
+        let newPatientData = JSON.parse(data);
+        let patientIndex = newPatientData.findIndex(patient => patient.MRN === MRN && patient.patientName === patientName);
+        if (patientIndex !== -1) {
+            newPatientData[patientIndex] = newData; 
+        } else {
+            res.status(404).send('Patient not found');
+            return;
+        }
+        fs.writeFile('patients.json', JSON.stringify(newPatientData, null, 4), () => {});
+        res.send('Patient data updated successfully');
+    });
+});
+
+
 app.post("/", (req,res)=> {
     let questionnaireData = req.body;
     console.log(questionnaireData);
