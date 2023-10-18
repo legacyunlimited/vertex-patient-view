@@ -3,10 +3,11 @@ import fs from 'fs';
 import path from 'path';
 import axios from 'axios';
 import { fileURLToPath } from 'url';
-
+import cors from 'cors';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
+app.use(cors());
 const port = 2270;
 
 app.use(express.static(path.join(__dirname,".")));
